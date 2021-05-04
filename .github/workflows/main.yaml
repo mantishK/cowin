@@ -1,8 +1,9 @@
 name: Release Go Binaries
 
 on: 
-  release:
-    types: [created]
+  push:
+    branches:
+      - feature/github-actions-binary-build
   workflow_dispatch:
 
 env:
