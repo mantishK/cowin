@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  CMD_PATH: ./main.go
+  CMD_PATH: ./cmd/main.go
 
 
 jobs:
