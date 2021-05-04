@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  CMD_PATH: ./cmd/vt2geojson
+  CMD_PATH: ./main.go
 
 
 jobs:
