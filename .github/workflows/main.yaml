@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  CMD_PATH: ./cmd/cowin
+  CMD_PATH: ./cmd
 
 
 jobs:
