@@ -44,7 +44,10 @@ type CenterDetails struct {
 
 func GetSchedule(districtID int, minAge int) []CenterDetails {
 	date := time.Now().Format("02-01-2006")
-	resp, err := http.Get(fmt.Sprintf("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=%d&date=%s", districtID, date))
+	req, err := http.NewRequest("GET", fmt.Sprintf("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=%d&date=%s", districtID, date), nil)
+	req.Header.Add("user-agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36")
+	client := http.DefaultClient
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Println(err)
 		panic("Failed to fetch")
