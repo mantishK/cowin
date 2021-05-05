@@ -9,6 +9,13 @@ import (
 	"time"
 )
 
+var districtIDMap = map[string]int{
+	"hbl":  278,
+	"blr":  265,
+	"pn":   363,
+	"bbmp": 294,
+}
+
 type Center struct {
 	Name      string    `json:"name"`
 	Address   string    `json:"address"`
@@ -18,7 +25,7 @@ type Center struct {
 
 type Session struct {
 	Date              string   `json:"date"`
-	AvailableCapacity int      `json:"available_capacity"`
+	AvailableCapacity float64  `json:"available_capacity"`
 	MinAge            int      `json:"min_age_limit"`
 	Vaccine           string   `json:"vaccine"`
 	Slots             []string `json:"slots"`
@@ -29,7 +36,7 @@ type CenterDetails struct {
 	Address           string   `json:"address"`
 	BlockName         string   `json:"block_name"`
 	Date              string   `json:"date"`
-	AvailableCapacity int      `json:"available_capacity"`
+	AvailableCapacity float64  `json:"available_capacity"`
 	MinAge            int      `json:"min_age_limit"`
 	Vaccine           string   `json:"vaccine"`
 	Slots             []string `json:"slots"`
@@ -75,4 +82,24 @@ func GetSchedule(districtID int, minAge int) []CenterDetails {
 		}
 	}
 	return availableCenters
+}
+
+func GetFormattedCenters(centers []CenterDetails) string {
+	details := ""
+	for _, center := range centers {
+		details += fmt.Sprintln("Name:", center.Name)
+		details += fmt.Sprintln("Address:", center.Address)
+		details += fmt.Sprintln("Block:", center.BlockName)
+		details += fmt.Sprintln("Date:", center.Date)
+		details += fmt.Sprintln("Vaccine:", center.Vaccine)
+		details += fmt.Sprintln("Slots:", center.Slots)
+		details += fmt.Sprintln("Min Age:", center.MinAge)
+		details += fmt.Sprintln("=========================================")
+		details += fmt.Sprint("\n\n")
+	}
+	return details
+}
+
+func GetDistrictID(district string) int {
+	return districtIDMap[district]
 }
